@@ -1,13 +1,43 @@
-<!DOCTYPE html>
+
+<!-- This create task is about a story of a seal named Silly trying to save her village from the evil polar bears. 
+ The game has 3 diffrent endings and is determined by which options the player chooses based on the Radio boxes. 
+ Each choice is added within an array corresponding to their desired ending they choose. The player can additionaly collect items they get from the enviorments and give them to people they meet within the journey stored in another array which is an inventory.
+ If statements are used to navigate wheter a person selected an option to guide the story based on the text or gives an item and functions are used to call buttons. When an ending is acheived, the "Endings Achieved" section is updated to show the player gained an ending and the player is free to play the game again!
+ -->
+
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>Silly the Seal's Adventure!</title>
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Your html goes here...</h1>
-    <br>See the <a href="README.md">README</a> for project details
+    <h1>Silly the Seal's Adventure</h1>
+    <h2>Where our story begins...</h2>
+    <p> Long ago near the arctic tundra, there was a little seal who had to go to save her village by stopping the polar bears from attacking! Play this game to help her succeed at this goal!</p>
+    <div>
+   <h3> Start Game Here!</h3>   
+    <button type ="button" id="startGame"> Start Game </button>
+   <p id="storytext"> Hey there! I'm Silly and I need to protect my friends at the seal village from the evil polar bears! Which path should I take to reach their evil lair? </p>
+    
+  <input type="radio" id="1" name="choices">
+  <label for="1"> The Hail-Shower Hills</label>
+   
+   <input type="radio" id="2" name="choices">
+  <label for="2"> The Snowflower Snowfield </label>
+
+  <input type="radio" id="3" name="choices">
+  <label for="3"> The Ice-Shard Cavern </label>
+<button type ="button" id="choiceSubmit"> Submit Choice </button>
+
+<h4> Current Inventory </h4>
+<p id="items"> You have nothing in your inventory! </p>
+</div>
+<h3> Endings Achieved</h3>
+<p id="goodEnd">Good Ending: Not Achieved</p>
+<p id="badEnd">Bad Ending: Not Achieved</p>
+<p id="questionEnd">??? Ending: Not Achieved</p>
 </body>
 </html>
