@@ -14,10 +14,10 @@ startGame.addEventListener("click", gameBegin);
 
 let choiceGood = document.getElementById("good");    // goodchoice
 choiceGood.addEventListener("click", function() {arrAdd("good")});
-let choiceHmm = document.getElementById("hmm");    // mystery choice
+let choiceHmm = document.getElementById("hmm");    // hmm choice
 choiceHmm.addEventListener("click", function() {arrAdd("hmm")})
 
-let choiceBad = document.getElementById("bad");    // hmm choice
+let choiceBad = document.getElementById("bad");    // bad choice
 choiceBad.addEventListener("click", function() {arrAdd("bad")})
 
 
@@ -41,7 +41,7 @@ startGame.disabled = true;
 //update text
 document.getElementById("gameInst").textContent = "Game is running!";
 document.getElementById("storytext").textContent = "Hey there! I'm Silly and I need to protect my friends at the seal village from the evil polar bears! Which path should I take to reach their evil lair?";
-document.getElementById("good").textContent = "The Snow-Spring Hills, a relatively calm, albeit long way from the polar bears!";
+document.getElementById("good").textContent = "The Snow-Spring Hills, a relatively calm and reliable travel path!";
 document.getElementById("hmm").textContent = "The Eerie Snow Shortcut Tunnel, known for being a risky shortcut for traveling!";
 document.getElementById("bad").textContent = "The Ice-Shard Mountain, a tall sharp mountain that poses many diffculties for getting across!";
 
@@ -53,7 +53,7 @@ function storyBranch1(){
 //update text
 document.getElementById("storytext").textContent = "Now that Silly has traveled through the chosen landscape, she needs to rest now to regain her energy at a nearby town. Where is she sleeping tonight?";
 document.getElementById("good").textContent = "The PeinguINN, a local hotel with fair ratings!";
-document.getElementById("hmm").textContent = "At a small campsite, known for either cursing or blessing visitors!";
+document.getElementById("hmm").textContent = "At a small campsite, known for its spirits that curse or bless visitors!";
 document.getElementById("bad").textContent = "No sleeping for Silly, continue on with the journey!";
 // branch 1 stops here
 branch1Run = false;
@@ -63,7 +63,7 @@ branch1Run = false;
 
 function storyBranch2(){
 //update text
-document.getElementById("storytext").textContent = "Silly has now reached the evil polar bear lair. How will she able to prevent them from attack the village?";
+document.getElementById("storytext").textContent = "Silly has now reached the evil polar bear lair! How will she able to prevent them from attack the village?";
 document.getElementById("good").textContent = "Seal-style karate!";
 document.getElementById("hmm").textContent = "The power of friendship!";
 document.getElementById("bad").textContent = "A flamethrower!";
@@ -71,10 +71,10 @@ document.getElementById("bad").textContent = "A flamethrower!";
 branch2Run = false;
 }
 
+
+
 // story endings
 function storyEnd(){
-document.getElementById("storytext").textContent = "test"; // filler code to check if statements
-
 //  score determine
 for(let i = 0; i < theEnd.length; i++){
     if(theEnd[i] === "good"){
@@ -90,15 +90,15 @@ document.getElementById("gameInst").textContent = "Good end achieved! Press the 
 document.getElementById("storytext").textContent = "Silly managed to meet the polar bears and prevent them from attacking her village due to your smart thinking!";
 } else {
     document.getElementById("gameInst").textContent = "Bad end achieved! Press the start button to play again";
-    document.getElementById("storytext").textContent = "Silly failed to prevent the polar bears from her attacking her village either by you taking too many risks or your bad decisions!";
+    document.getElementById("storytext").textContent = "Silly failed to prevent the polar bears from her attacking her village either by taking too many risks or bad decision making!";
 }
-//reset variables buttons and arrays
+//reset variables, buttons, and arrays
 choiceGood.disabled = true;  
 choiceHmm.disabled = true;   
 choiceBad.disabled = true;
 startGame.disabled = false;
 
-theEnd.length = 0;
+theEnd = [];
 
 winDetermine = 0;
 loseDetermine = 0;
@@ -110,7 +110,9 @@ branch2Run = true;
 
 
 //function paraamter to add values
-function arrAdd(choice){
+
+// debugged logic issues using ChatGPT, specifcally for the button values "hmm" input and "bad" input errors
+function arrAdd(choice){   
     if(choice === "good"){ //good option
         theEnd.push("good");
 }
@@ -126,6 +128,7 @@ function arrAdd(choice){
     else{ // bad option
     theEnd.push("bad");
 }
+// finished debug logic issues using ChatGPT
 
 //branch story determine
 if (branch1Run === true){
