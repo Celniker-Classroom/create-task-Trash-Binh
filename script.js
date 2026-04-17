@@ -12,6 +12,7 @@ let loseDetermine = 0;
 let startGame = document.getElementById("startGame");    // starts the game
 startGame.addEventListener("click", gameBegin);
 
+// AI FIXED CODE using ChatGPT by using function(){arrDelay}
 let choiceGood = document.getElementById("good");    // goodchoice
 choiceGood.addEventListener("click", function() {arrAdd("good")});
 let choiceHmm = document.getElementById("hmm");    // hmm choice
@@ -19,7 +20,7 @@ choiceHmm.addEventListener("click", function() {arrAdd("hmm")})
 
 let choiceBad = document.getElementById("bad");    // bad choice
 choiceBad.addEventListener("click", function() {arrAdd("bad")})
-
+// AI fixed code ends here
 
 //buttons that are disabled when started
 choiceGood.disabled = true;   
@@ -48,7 +49,6 @@ document.getElementById("bad").textContent = "The Ice-Shard Mountain, a tall sha
 }
 
 
-
 function storyBranch1(){
 //update text
 document.getElementById("storytext").textContent = "Now that Silly has traveled through the chosen landscape, she needs to rest now to regain her energy at a nearby town. Where is she sleeping tonight?";
@@ -60,7 +60,6 @@ branch1Run = false;
 }
 
 
-
 function storyBranch2(){
 //update text
 document.getElementById("storytext").textContent = "Silly has now reached the evil polar bear lair! How will she able to prevent them from attack the village?";
@@ -70,7 +69,6 @@ document.getElementById("bad").textContent = "A flamethrower!";
 // branch 2 stops here
 branch2Run = false;
 }
-
 
 
 // story endings
@@ -97,22 +95,17 @@ choiceGood.disabled = true;
 choiceHmm.disabled = true;   
 choiceBad.disabled = true;
 startGame.disabled = false;
-
 theEnd = [];
-
 winDetermine = 0;
 loseDetermine = 0;
-
 branch1Run = true;
 branch2Run = true;
-
 }
 
 
 //function paraamter to add values
-
-// debugged logic issues using ChatGPT, specifcally for the button values "hmm" input and "bad" input errors
 function arrAdd(choice){   
+// debugged logic issues using ChatGPT, specifcally for the button values "hmm" input and "bad" input errors by identifying typo of not using "ëlse" in if else
     if(choice === "good"){ //good option
         theEnd.push("good");
 }
