@@ -1,16 +1,21 @@
 
-// boolean values to change functions for branches, 
+
+
+// boolean values to change functions for branches,
 // set them true and then slowly turn the off for each step
 let branch1Run = true;
 let branch2Run = true;
+
 
 // total array count to determine good or bad
 let winDetermine = 0;
 let loseDetermine = 0;
 
+
 // button variables
 let startGame = document.getElementById("startGame");    // starts the game
 startGame.addEventListener("click", gameBegin);
+
 
 // AI FIXED CODE using ChatGPT by using function(){arrDelay}
 let choiceGood = document.getElementById("good");    // goodchoice
@@ -18,26 +23,32 @@ choiceGood.addEventListener("click", function() {arrAdd("good")});
 let choiceHmm = document.getElementById("hmm");    // hmm choice
 choiceHmm.addEventListener("click", function() {arrAdd("hmm")})
 
+
 let choiceBad = document.getElementById("bad");    // bad choice
 choiceBad.addEventListener("click", function() {arrAdd("bad")})
 // AI fixed code ends here
 
+
 //buttons that are disabled when started
-choiceGood.disabled = true;   
+choiceGood.disabled = true;  
 choiceHmm.disabled = true;  
 choiceBad.disabled = true;  
+
 
 //arrays added for game ending
 let theEnd = [];
 
+
 /// STORY BRANCHES
 function gameBegin(){
 
+
 //renable submit choice buttons
 choiceGood.disabled = false;  
-choiceHmm.disabled = false;   
+choiceHmm.disabled = false;  
 choiceBad.disabled = false;
 startGame.disabled = true;
+
 
 //update text
 document.getElementById("gameInst").textContent = "Game is running!";
@@ -46,7 +57,10 @@ document.getElementById("good").textContent = "The Snow-Spring Hills, a relative
 document.getElementById("hmm").textContent = "The Eerie Snow Shortcut Tunnel, known for being a risky shortcut for traveling!";
 document.getElementById("bad").textContent = "The Ice-Shard Mountain, a tall sharp mountain that poses many diffculties for getting across!";
 
+
 }
+
+
 
 
 function storyBranch1(){
@@ -60,6 +74,8 @@ branch1Run = false;
 }
 
 
+
+
 function storyBranch2(){
 //update text
 document.getElementById("storytext").textContent = "Silly has now reached the evil polar bear lair! How will she able to prevent them from attack the village?";
@@ -71,16 +87,19 @@ branch2Run = false;
 }
 
 
-// story endings
+
+
+
 function storyEnd(){
-//  score determine
+
 for(let i = 0; i < theEnd.length; i++){
     if(theEnd[i] === "good"){
-        winDetermine++;  //add points to determine win
+        winDetermine++;  
     } else{
-        loseDetermine++; ///add points to determine losss
+        loseDetermine++; 
     }
     }
+
 
 // win or lose determine
 if(winDetermine>loseDetermine){
@@ -92,7 +111,7 @@ document.getElementById("storytext").textContent = "Silly managed to meet the po
 }
 //reset variables, buttons, and arrays
 choiceGood.disabled = true;  
-choiceHmm.disabled = true;   
+choiceHmm.disabled = true;  
 choiceBad.disabled = true;
 startGame.disabled = false;
 theEnd = [];
@@ -103,41 +122,35 @@ branch2Run = true;
 }
 
 
-//function paraamter to add values
-function arrAdd(choice){   
-// debugged logic issues using ChatGPT, specifcally for the button values "hmm" input and "bad" input errors by identifying typo of not using "ëlse" in if else
-    if(choice === "good"){ //good option
+
+
+
+function arrAdd(choice){  
+
+    if(choice === "good"){ 
         theEnd.push("good");
 }
-    else if(choice === "hmm"){ //risky option
-        let riskOutcome = Math.floor(Math.random()*2); // integer of 1 or 0 to determine addition of points towards good or bad
+    else if(choice === "hmm"){ 
+        let riskOutcome = Math.floor(Math.random()*2); 
             if(riskOutcome === 1){
                 theEnd.push("good");
             }
             else{
                 theEnd.push("bad");
             }
-} 
+}
     else{ // bad option
     theEnd.push("bad");
 }
-// finished debug logic issues using ChatGPT
+
+
 
 //branch story determine
 if (branch1Run === true){
 storyBranch1();
 } else if(branch2Run === true){
     storyBranch2();
-} else{ 
+} else{
     storyEnd();
 }
 }
-
-
-
-
-
-
-
-
-
