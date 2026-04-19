@@ -1,6 +1,4 @@
 
-
-
 // boolean values to change functions for branches,
 // set them true and then slowly turn the off for each step
 let branch1Run = true;
@@ -56,8 +54,6 @@ document.getElementById("storytext").textContent = "Hey there! I'm Silly and I n
 document.getElementById("good").textContent = "The Snow-Spring Hills, a relatively calm and reliable travel path!";
 document.getElementById("hmm").textContent = "The Eerie Snow Shortcut Tunnel, known for being a risky shortcut for traveling!";
 document.getElementById("bad").textContent = "The Ice-Shard Mountain, a tall sharp mountain that poses many diffculties for getting across!";
-
-
 }
 
 
@@ -89,19 +85,16 @@ branch2Run = false;
 
 
 
-
-function storyEnd(){
-
-for(let i = 0; i < theEnd.length; i++){
-    if(theEnd[i] === "good"){
-        winDetermine++;  
-    } else{
+function storyEnd(listArray){
+for(let i = 0; i < listArray.length; i++){
+    if(listArray[i] === "good"){
+        winDetermine++; 
+    }else{
         loseDetermine++; 
     }
     }
 
 
-// win or lose determine
 if(winDetermine>loseDetermine){
 document.getElementById("gameInst").textContent = "Good end achieved! Press the start button to play again";
 document.getElementById("storytext").textContent = "Silly managed to meet the polar bears and prevent them from attacking her village due to your smart thinking!";
@@ -109,7 +102,7 @@ document.getElementById("storytext").textContent = "Silly managed to meet the po
     document.getElementById("gameInst").textContent = "Bad end achieved! Press the start button to play again";
     document.getElementById("storytext").textContent = "Silly failed to prevent the polar bears from her attacking her village either by taking too many risks or bad decision making!";
 }
-//reset variables, buttons, and arrays
+
 choiceGood.disabled = true;  
 choiceHmm.disabled = true;  
 choiceBad.disabled = true;
@@ -124,33 +117,31 @@ branch2Run = true;
 
 
 
-
 function arrAdd(choice){  
-
-    if(choice === "good"){ 
+// debugged logic issues using ChatGPT, specifcally for the button values "hmm" input and "bad" input errors by identifying typo of not using "ëlse" in if else
+    if(choice === "good"){  //good input
         theEnd.push("good");
 }
-    else if(choice === "hmm"){ 
-        let riskOutcome = Math.floor(Math.random()*2); 
+    else if(choice === "hmm"){ // risky input, make it random
+        let riskOutcome = Math.floor(Math.random()*2);
             if(riskOutcome === 1){
                 theEnd.push("good");
             }
-            else{
+            else{ //bad input
                 theEnd.push("bad");
             }
 }
-    else{ // bad option
+    else{ 
     theEnd.push("bad");
 }
 
 
-
-//branch story determine
+// determine story path
 if (branch1Run === true){
 storyBranch1();
 } else if(branch2Run === true){
     storyBranch2();
 } else{
-    storyEnd();
+    storyEnd(theEnd);
 }
 }
