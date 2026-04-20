@@ -122,7 +122,7 @@ function arrAdd(choice){
     if(choice === "good"){  //good input
         theEnd.push("good");
 }
-    else if(choice === "hmm"){ // risky input, make it random
+    else if(choice === "hmm"){ 
         let riskOutcome = Math.floor(Math.random()*2);
             if(riskOutcome === 1){
                 theEnd.push("good");

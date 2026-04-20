@@ -1,1 +1,32 @@
-/* Add Global styles here */
+body{
+    background-color: #edf4ff;
+    text-align: center;
+    font-size: x-large;
+    font-family: "Gaegu", sans-serif;
+    
+}
+
+#gameChoice{
+    color:#97bfff;
+    font-family: "Gaegu", sans-serif;
+}
+
+#good{
+    background-color: #f4f8ff;
+    font-family: "Gaegu", sans-serif;
+}
+
+#hmm{
+   background-color: #f4f8ff; 
+   font-family: "Gaegu", sans-serif;
+}
+
+#bad{
+    background-color: #f4f8ff;
+    font-family: "Gaegu", sans-serif;
+}
+
+#startGame{
+    background-color: #f4f8ff;
+    font-family: "Gaegu", sans-serif;
+}
