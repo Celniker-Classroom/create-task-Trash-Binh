@@ -1,4 +1,5 @@
 body{
+    color:#97bfff;
     background-color: #edf4ff;
     text-align: center;
     font-size: x-large;
@@ -6,27 +7,50 @@ body{
     
 }
 
-#gameChoice{
+#title{
+    border: 2px solid #97bfff;
+     background-color: #ffffff;
+    position: center;
     color:#97bfff;
     font-family: "Gaegu", sans-serif;
+    border-radius: 30px;
+    width: 60%;  
+}
+
+#gameChoice{
+    border: 2px solid #97bfff;
+     background-color: #ffffff;
+    position: center;
+    color:#97bfff;
+    font-family: "Gaegu", sans-serif;
+    border-radius: 30px;
+    width: 60%;
 }
 
 #good{
     background-color: #f4f8ff;
     font-family: "Gaegu", sans-serif;
+    border: 2px solid #97bfff;
+    color: #97bfff;
 }
 
 #hmm{
    background-color: #f4f8ff; 
    font-family: "Gaegu", sans-serif;
+   border: 2px solid #97bfff;
+   color: #97bfff;
 }
 
 #bad{
     background-color: #f4f8ff;
     font-family: "Gaegu", sans-serif;
+    border: 2px solid #97bfff;
+    color: #97bfff;
 }
 
 #startGame{
     background-color: #f4f8ff;
     font-family: "Gaegu", sans-serif;
+    border: 2px solid #97bfff;
+    color: #97bfff;
 }

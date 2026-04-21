@@ -103,6 +103,8 @@ document.getElementById("storytext").textContent = "Silly managed to meet the po
     document.getElementById("storytext").textContent = "Silly failed to prevent the polar bears from her attacking her village either by taking too many risks or bad decision making!";
 }
 
+
+
 choiceGood.disabled = true;  
 choiceHmm.disabled = true;  
 choiceBad.disabled = true;
@@ -113,6 +115,13 @@ loseDetermine = 0;
 branch1Run = true;
 branch2Run = true;
 }
+
+function specialDetect(listArray){ //detects for any special endings
+    if (listArray=["good", "good", "good"]){
+        document.getElementById("notifySpe").textContent = "You achieved the Super Good End, you made all the best choices and not only protected your kingdom, you were so strong that you kicked butt with every polar bear to the point they were scared and ran away."
+    }
+
+    }
 
 
 
@@ -142,6 +151,8 @@ storyBranch1();
 } else if(branch2Run === true){
     storyBranch2();
 } else{
+    specialDetect(theEnd);
     storyEnd(theEnd);
+    
 }
 }
