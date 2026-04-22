@@ -10,6 +10,9 @@ let winDetermine = 0;
 let loseDetermine = 0;
 
 
+/// gamblEnding count
+let gambleCount = 0;
+
 // button variables
 let startGame = document.getElementById("startGame");    // starts the game
 startGame.addEventListener("click", gameBegin);
@@ -74,7 +77,7 @@ branch1Run = false;
 
 function storyBranch2(){
 //update text
-document.getElementById("storytext").textContent = "Silly has now reached the evil polar bear lair! How will she able to prevent them from attack the village?";
+document.getElementById("storytext").textContent = "Silly has now reached the evil polar bear lair! How will she able to prevent them from attacking the village?";
 document.getElementById("good").textContent = "Seal-style karate!";
 document.getElementById("hmm").textContent = "The power of friendship!";
 document.getElementById("bad").textContent = "A flamethrower!";
@@ -83,45 +86,57 @@ branch2Run = false;
 }
 
 
+function storyEnd(listArray){ // determine base outcome
 
-
-function storyEnd(listArray){
-for(let i = 0; i < listArray.length; i++){
-    if(listArray[i] === "good"){
+    for(let i = 0; i < listArray.length; i++){
+       if(listArray[i] === "good"){
         winDetermine++; 
-    }else{
+     }
+     else{
         loseDetermine++; 
     }
     }
 
-
-if(winDetermine>loseDetermine){
-document.getElementById("gameInst").textContent = "Good end achieved! Press the start button to play again";
-document.getElementById("storytext").textContent = "Silly managed to meet the polar bears and prevent them from attacking her village due to your smart thinking!";
-} else {
-    document.getElementById("gameInst").textContent = "Bad end achieved! Press the start button to play again";
-    document.getElementById("storytext").textContent = "Silly failed to prevent the polar bears from her attacking her village either by taking too many risks or bad decision making!";
-}
-
-
-
-choiceGood.disabled = true;  
-choiceHmm.disabled = true;  
-choiceBad.disabled = true;
-startGame.disabled = false;
-theEnd = [];
-winDetermine = 0;
-loseDetermine = 0;
-branch1Run = true;
-branch2Run = true;
-}
-
-function specialDetect(listArray){ //detects for any special endings
-    if (listArray=["good", "good", "good"]){
-        document.getElementById("notifySpe").textContent = "You achieved the Super Good End, you made all the best choices and not only protected your kingdom, you were so strong that you kicked butt with every polar bear to the point they were scared and ran away."
+   if(winDetermine>loseDetermine){ // determine base good or bad end
+    document.getElementById("gameInst").textContent = "Good end achieved! Press the start button to play again";
+    document.getElementById("storytext").textContent = "Silly managed to meet the polar bears and prevent them from attacking her village due to your smart thinking!";
+     } else {
+      document.getElementById("gameInst").textContent = "Bad end achieved! Press the start button to play again";
+     document.getElementById("storytext").textContent = "Silly failed to prevent the polar bears from her attacking her village either by taking too many risks or bad decision making!";
     }
 
+specialEnd();
+
+// reset choices
+    branch1Run = true;
+    branch2Run = true;
+    choiceGood.disabled = true;  
+    choiceHmm.disabled = true;  
+    choiceBad.disabled = true;
+    startGame.disabled = false;
+    theEnd = [];
+    winDetermine = 0;
+    loseDetermine = 0; 
+}
+    
+
+ 
+function specialEnd(){ // checks and update for special eding
+    if(theEnd.join(",") === ("good,good,good")){ //array.join from w3schools: https://www.w3schools.com/jsref/jsref_join.asp
+    document.getElementById("gameInst").textContent = "Rare Special Ending: Super Good End! Press the start button to play again";
+    document.getElementById("storytext").textContent = "Not only did you prevent the polar bears from attacking, you were so smart that they even forfeited all of their kingdom's money and gave it to the Seal Village!";
+    document.getElementById("pureEnd").textContent = "Super Good Ending: Achieved";
+}
+else if(theEnd.join(",")=== ("bad,bad,bad")){
+    document.getElementById("gameInst").textContent = "Rare Special Ending: Super Bad End! Press the start button to play again";
+    document.getElementById("storytext").textContent = "A lot of bad choices were defnitely here. Not only was Silly tired and exhausted when coming to the Polar Bear lair, she also accidently turned the flamethrower on the highest heat due to her being exhausted! As a result, not only did she melted the polar bear's homes but also the entire artics's as well! Whoopsies!";
+    document.getElementById("unpureEnd").textContent = "Super Bad Ending: Achieved";  
+}
+    else{
+    
     }
+}
+
 
 
 
@@ -151,8 +166,5 @@ storyBranch1();
 } else if(branch2Run === true){
     storyBranch2();
 } else{
-    specialDetect(theEnd);
     storyEnd(theEnd);
-    
-}
-}
+}}
