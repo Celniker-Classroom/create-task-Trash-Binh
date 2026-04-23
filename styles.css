@@ -7,6 +7,40 @@ body{
     
 }
 
+
+img{
+    width: 50%;
+    height: auto;
+    border-radius: 30px;
+    border: 2px solid #97bfff;
+}
+
+#special{
+    font-weight: bold;
+}
+
+ /* container used to properly center website */
+#centerItems{
+    display:grid;
+    align-items: center;
+    place-items: center;
+    float: right;
+}
+
+/* story*/
+#expo{
+    border: 2px solid #97bfff;
+     background-color: #ffffff;
+    position: center;
+    color:#97bfff;
+    font-family: "Gaegu", sans-serif;
+    border-radius: 30px;
+    width: 60%;
+    height: auto;
+    margin: 10px;
+}
+
+/* title on top*/
 #title{
     border: 2px solid #97bfff;
      background-color: #ffffff;
@@ -17,6 +51,7 @@ body{
     width: 60%;  
 }
 
+/* where users select buttons */
 #gameChoice{
     border: 2px solid #97bfff;
      background-color: #ffffff;
@@ -25,32 +60,94 @@ body{
     font-family: "Gaegu", sans-serif;
     border-radius: 30px;
     width: 60%;
+    height: auto;
+    margin: 10px;
 }
 
-#good{
+
+/* games special endings */
+#achieve{ 
+    border: 2px solid #97bfff;
+     background-color: #ffffff;
+    position: center;
+    color:#97bfff;
+    font-family: "Gaegu", sans-serif;
+    border-radius: 30px;
+    width: 60%;
+    height: auto;
+    margin: 10px;
+}
+
+
+
+ /* button styling */
+
+#good{ 
     background-color: #f4f8ff;
     font-family: "Gaegu", sans-serif;
     border: 2px solid #97bfff;
     color: #97bfff;
+    border-radius: 30px;
 }
 
+
+#good:disabled{
+     background-color: #e7efff;
+    font-family: "Gaegu", sans-serif;
+    border: 2px solid #c7d6ee;
+    color: #c7d6ee;
+    border-radius: 30px;
+}
+
+ 
+
+/* hmmm buttons*/
 #hmm{
    background-color: #f4f8ff; 
    font-family: "Gaegu", sans-serif;
    border: 2px solid #97bfff;
    color: #97bfff;
+   border-radius: 30px;
 }
 
+#hmm:disabled{
+     background-color: #e7efff;
+    font-family: "Gaegu", sans-serif;
+    border: 2px solid #c7d6ee;
+    color: #c7d6ee;
+    border-radius: 30px;
+}
+
+/* bad buttons*/
 #bad{
     background-color: #f4f8ff;
     font-family: "Gaegu", sans-serif;
     border: 2px solid #97bfff;
     color: #97bfff;
+    border-radius: 30px;
 }
 
+#bad:disabled{
+     background-color: #e7efff;
+    font-family: "Gaegu", sans-serif;
+    border: 2px solid #c7d6ee;
+    color: #c7d6ee;
+    border-radius: 30px;
+}
+
+/* game start buttons*/
 #startGame{
     background-color: #f4f8ff;
     font-family: "Gaegu", sans-serif;
     border: 2px solid #97bfff;
     color: #97bfff;
+    border-radius: 30px;
+}
+
+#startGame:disabled{
+     background-color: #e7efff;
+    font-family: "Gaegu", sans-serif;
+    border: 2px solid #c7d6ee;
+    color: #c7d6ee;
+    border-radius: 30px;
 }
