@@ -18,12 +18,13 @@ let  unpureCount =0;
 let startGame = document.getElementById("startGame");    // starts the game
 startGame.addEventListener("click", gameBegin);
 
-//arrays added for game ending
+//arrays added for game ending,"place" are place holder values
 let theEnd = [];
 
 // out come select
 let firstChoice = theEnd[0];
-
+let secondChoice = theEnd[1];
+let thirdChoice = theEnd[2];
 
 
 // AI FIXED CODE using ChatGPT by using function(){arrDelay}
@@ -58,55 +59,69 @@ startGame.disabled = true;
 //update text
 document.getElementById("gameInst").textContent = "Game is running!";
 document.getElementById("storytext").textContent = "Hey there! I'm Silly and I need to protect my friends at the seal village from the evil polar bears! Which path should I take to reach their evil lair?";
-document.getElementById("good").textContent = "The Snow-Spring Hills, a relatively calm and reliable travel path!";
-document.getElementById("hmm").textContent = "The Eerie Snow Shortcut Tunnel, known for being a risky shortcut for traveling!";
-document.getElementById("bad").textContent = "The Ice-Shard Mountain, a tall sharp mountain that poses many diffculties for getting across!";
+document.getElementById("good").textContent = "Snow-Spring Hills, a relatively calm and reliable travel path!";
+document.getElementById("hmm").textContent = "Ice-Shard Shortcut Tunnel, known for being a risky shortcut for traveling!";
+document.getElementById("bad").textContent = "Avalanche Mountain, a tall steep mountain that poses many diffculties for getting across!";
 }
 
 
 
 
 function storyBranch1(){
-// 1st choices result
-if ((firstChoice = "good") && (pureCount = 1)){ // good choice, good result
- document.getElementById("resultChoice").textContent = "Silly scoots along the Snow-Spring Hill peacfully. On her way, she found a lot of rare herbal medicine (extremly rare in the Artic) that she could use!"
-}
-else if ((firstChoice = "good") && (gambleCount = 1)){
-  document.getElementById("resultChoice").textContent = "Silly scoots into the tunnel. She ends up relatively unscathed as a result and now is able to rest earlier!" ; 
-}
-else if ((firstChoice = "bad") && (gambleCount = 1)){
-  document.getElementById("resultChoice").textContent = "Silly scoots into the tunnel. She ends up relatively unscathed as a result and now is able to rest earlier!" ; 
-}
+    // 1st choices result
+    if ((firstChoice === "good") && (pureCount === 1)){ // good choice, good result
+     document.getElementById("resultChoice").textContent = "Silly scoots along the Snow-Spring Hill peacefully. On her way, she found a lot of rare herbal medicine (extremly rare in the Artic) that she could use!"
+     }
+     else if ((firstChoice === "good") && (gambleCount === 1)){ //hmm choice, good result
+       document.getElementById("resultChoice").textContent = "Silly scoots into the tunnel. She ends up relatively unscathed as a result and now is able to rest earlier!" ; 
+       }
+       else if ((firstChoice === "bad") && (gambleCount === 1)){//hmm choice, bad result
+         document.getElementById("resultChoice").textContent = "Silly scoots into the tunnel. Howeve, due to the route being unstable due to frequent earthquaks, the ice shards of the cave fel down quickly, blocking many off Silly's path. In the end after several scratches and a few detours she ended up traveling way longer than needed!";
+         }else if ((firstChoice === "bad") && (unpureCount = 1)){//bad choice, bad result
+           document.getElementById("resultChoice").textContent = "Silly slowly makes her way up the moutain. However, just like the name implies, there was a strong avalanche that Silly got stuck in. Ulitmately, this delayed her travel by a really long time";
+           }
+
+            //update text
+            document.getElementById("storytext").textContent = "Now that Silly has traveled through the chosen landscape, she needs to rest now to regain her energy at a nearby town. Where is she sleeping tonight?";
+            document.getElementById("good").textContent = "The PeinguINN, a local hotel with fair ratings!";
+            document.getElementById("hmm").textContent = "At a small campsite, known for its spirits that curse or bless visitors!";
+            document.getElementById("bad").textContent = "No sleeping for Silly, continue on with the journey!";
 
 
-
- //update text
-document.getElementById("storytext").textContent = "Now that Silly has traveled through the chosen landscape, she needs to rest now to regain her energy at a nearby town. Where is she sleeping tonight?";
-document.getElementById("good").textContent = "The PeinguINN, a local hotel with fair ratings!";
-document.getElementById("hmm").textContent = "At a small campsite, known for its spirits that curse or bless visitors!";
-document.getElementById("bad").textContent = "No sleeping for Silly, continue on with the journey!";
-
-
-// branch 1 stops here
-branch1Run = false;
-}
+            // branch 1 stops here
+            branch1Run = false;
+            }
 
 
 
 
 function storyBranch2(){
-//update text
+
+ // 1st choices result
+if ((secondChoice === "good") && (pureCount = 1)){ // good choice, good result
+  document.getElementById("resultChoice").textContent = "Silly stopped by the PenguINN, a local hotel known for good hospitality. The staff there were very nice and gave Silly an affordable and comfortable room to sleep in! As a rsult, Silly endedd up getting very good sleep!";
+ }else if ((secondChoice === "good") && (gambleCount = 2)){ //hmm choice, good result
+  document.getElementById("resultChoice").textContent = "Silly, while collecting artic wood for her camp, stumbled across a treasure chest filled with food and supplies. She ended up having extremly good rest as a result!" ; 
+}
+else if ((secondChoice === "bad") && (gambleCount = 1)){//hmm choice, bad result
+ document.getElementById("resultChoice").textContent = "Silly accidently woke up a cursed sprit when setting up camp. The sprit ended taking all of her food and money she had, making silly very hungry and cold while sleeping there!";
+ }else if ((secondChoice === "bad") && (unpureCount = 1)){//bad choice, bad result
+document.getElementById("resultChoice").textContent = "Silly continued on with her journey, however ue to her tiredness, she collasped onto the snow and then a pack of artic foxes stole all of her food supplies. How sad!";
+ }
+
+
+                   //update text
 document.getElementById("storytext").textContent = "Silly has now reached the evil polar bear lair! How will she able to prevent them from attacking the village?";
 document.getElementById("good").textContent = "Seal-style karate!";
 document.getElementById("hmm").textContent = "The power of friendship!";
-document.getElementById("bad").textContent = "A flamethrower!";
-// branch 2 stops here
+ document.getElementById("bad").textContent = "A flamethrower!";
+                   // branch 2 stops here
 branch2Run = false;
-}
+                   }
 
 
-function storyEnd(listArray){ // determine base outcome
 
+function storyEnd(listArray){ 
     for(let i = 0; i < listArray.length; i++){
        if(listArray[i] === "good"){
         winDetermine++; 
@@ -116,7 +131,7 @@ function storyEnd(listArray){ // determine base outcome
     }
     }
 
-   if(winDetermine>loseDetermine){ // determine base good or bad end
+   if(winDetermine>loseDetermine){ 
     document.getElementById("gameInst").textContent = "Good end achieved! Press the start button to play again";
     document.getElementById("storytext").textContent = "Silly managed to meet the polar bears and prevent them from attacking her village due to your smart thinking!";
      } else {
@@ -124,10 +139,6 @@ function storyEnd(listArray){ // determine base outcome
      document.getElementById("storytext").textContent = "Silly failed to prevent the polar bears from her attacking her village either by taking too many risks or bad decision making!";
     }
 
-specialEnd();
-
-
-// reset choices
     branch1Run = true;
     branch2Run = true;
     choiceGood.disabled = true;  
@@ -137,11 +148,12 @@ specialEnd();
     theEnd = [];
     winDetermine = 0;
     loseDetermine = 0;
-    gambleCount= 0;
+
+}
+    specialEnd();
+gambleCount= 0;
     pureCount =0;
     unpureCount = 0; 
-}
-    
 
  
 function specialEnd(){ // checks and update for special endings
@@ -197,4 +209,5 @@ storyBranch1();
     storyBranch2();
 } else{
     storyEnd(theEnd);
-}}
+}
+}
