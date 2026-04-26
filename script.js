@@ -18,11 +18,6 @@ let  unpureCount =0;
 let startGame = document.getElementById("startGame");    // starts the game
 startGame.addEventListener("click", gameBegin);
 
-//arrays added for game ending,"place" are place holder values
-let theEnd = [];
-
-
-
 
 // AI FIXED CODE using ChatGPT by using function(){arrDelay}
 let choiceGood = document.getElementById("good");    // goodchoice
@@ -40,11 +35,33 @@ choiceHmm.disabled = true;
 choiceBad.disabled = true;  
 
 
+//arrays added for game ending
+let theEnd = [];
 
+//sound effects
+const buttonPress = new Audio("buttonPress.mp3"); //regular button clicking
+const goodEnd = new Audio("goodEnd.mp3"); // good ending
+const badEnd = new Audio("badEnd.mp3"); // bad ending
+const gambleEnd = new Audio("gambleEnd.mp3"); // bad ending
+const superGoodEnd = new Audio("superGoodEnd.mp3");
+const superBadEnd = new Audio("superBadEnd.mp3");
+//confetti effects
+var bad = confetti.shapeFromText({text:"❌"});
+var good = confetti.shapeFromText({text:"✅"});
+var gamble = confetti.shapeFromText({text:"🎰"});
+var supGood = confetti.shapeFromText({text:"🐧"});
+var supBad = confetti.shapeFromText({text:"🐻‍❄️"});
+
+//image changes
+
+let image = document.getElementById("storyChange");
 
 /// STORY BRANCHES
 function gameBegin(){
 
+image.src="storybranch1.png";   
+
+buttonPress.play();
 
 //renable submit choice buttons
 choiceGood.disabled = false;  
@@ -65,6 +82,10 @@ document.getElementById("bad").textContent = "Avalanche Mountain, a tall steep m
 
 
 function storyBranch1(){
+   
+   buttonPress.play();
+image.src="storybranch2.png"; 
+
     // 1st choices result
     if ((theEnd[0] === "good") && (pureCount === 1)){ // good choice, good result
      document.getElementById("resultChoice").textContent = "Silly scoots along the Snow-Spring Hill peacefully. On her way, she found a lot of rare herbal medicine (extremly rare in the Artic) that she could use!"
@@ -73,9 +94,9 @@ function storyBranch1(){
        document.getElementById("resultChoice").textContent = "Silly scoots into the tunnel. She ends up relatively unscathed as a result and now is able to rest earlier!" ; 
        }
        else if ((theEnd[0] === "bad") && (gambleCount === 1)){//hmm choice, bad result
-         document.getElementById("resultChoice").textContent = "Silly scoots into the tunnel. Howeve, due to the route being unstable due to frequent earthquaks, the ice shards of the cave fel down quickly, blocking many off Silly's path. In the end after several scratches and a few detours she ended up traveling way longer than needed!";
+         document.getElementById("resultChoice").textContent = "Silly scoots into the tunnel. Howeve, due to the route being unstable due to frequent earthquakes, the ice shards of the cave fell down quickly, blocking many off Silly's path. In the end after several scratches and a few detours she ended up traveling way longer than needed!";
          }else if ((theEnd[0] === "bad") && (unpureCount === 1)){//bad choice, bad result
-           document.getElementById("resultChoice").textContent = "Silly slowly makes her way up the moutain. However, just like the name implies, there was a strong avalanche that Silly got stuck in. Ulitmately, this delayed her travel by a really long time";
+           document.getElementById("resultChoice").textContent = "Silly slowly makes her way up the moutain. However, just like the name implies, there was a strong avalanche that Silly got stuck in. Ulitmately, this delayed her travels by a really long time";
            }
 
             //update text
@@ -94,7 +115,11 @@ function storyBranch1(){
 
 function storyBranch2(){
 
- // 2nd choices result
+buttonPress.play();
+    
+image.src="storybranch3.png"; 
+
+// 2nd choices result
 if ((theEnd[1] === "bad") && (gambleCount === 1||gambleCount === 2)){ //hmm choice, bad result
  document.getElementById("resultChoice").textContent = "Silly accidently woke up a cursed sprit when setting up camp. The sprit ended taking all of her food and money she had, making silly very hungry and cold while sleeping there!";
  }
@@ -128,7 +153,7 @@ branch2Run = false;
 
 
 function storyEnd(listArray){ 
-    
+buttonPress.play();    
   // 3rd choices result
 if ((theEnd[2] === "bad") && (gambleCount === 1||gambleCount === 2||gambleCount === 3)){ //hmm choice, bad result
  document.getElementById("resultChoice").textContent = "The polar bears laughed at you for even offering such a thing and then they all started to head for the Seal VIllage. Hopefully you were able to knock them out if you rested well!";
@@ -159,11 +184,25 @@ document.getElementById("resultChoice").textContent = "Silly, having trained in 
     }
 
    if(winDetermine>loseDetermine){ 
+   image.src="sillysealgood.png"
+    goodEnd.play();
     document.getElementById("gameInst").textContent = "Good end achieved! Press the start button to play again";
     document.getElementById("storytext").textContent = "In the end, Silly managed to meet the polar bears and prevent them from attacking her village due to your smart thinking!";
-     } else {
-      document.getElementById("gameInst").textContent = "Bad end achieved! Press the start button to play again";
+        confetti({
+        shapes:[good]
+        
+});
+;
+
+}
+else {
+      image.src="sillysealbad.png"
+    badEnd.play();
+        document.getElementById("gameInst").textContent = "Bad end achieved! Press the start button to play again";
      document.getElementById("storytext").textContent = "In the end, Silly failed to prevent the polar bears from her attacking her village either by taking too many risks or bad decision making!";
+    confetti({
+        shapes:[bad]
+    });
     }
 
 specialEnd();
@@ -188,23 +227,64 @@ gambleCount= 0;
  
 function specialEnd(){ // checks and update for special endings
  if(gambleCount===3){ //gamble ending, achieved by clicking all hmm options
+   //prevent any orginal sound from playinh
+    goodEnd.pause();
+    badEnd.pause();
+    //---------
+    gambleEnd.play();
     document.getElementById("gameInst").textContent = "Rare Special Ending: Super Gamble End! Press the start button to play again";
-    document.getElementById("storytext").textContent = "The polar bears were just about to decline Silly's offer for allyship until she pulled out a game of Go Fish. Intrguied the polar bears agreed to play the game, with the conditons being that if Silly wone, her village ends up safe while if the polar bears one, they get to attack. In the end, the game went on indefinatly as both polar bears and seal kept betting on each other until the world finally came to an end. ";
+    document.getElementById("storytext").textContent = "The polar bears were just about to discuss whether to take Silly's offer for allyship. Then, Silly pulled out a game of Go Fish. Interested, the polar bears agreed to play the game, with the conditons being that if Silly wone, her village ends up safe while if the polar bears one, they get to attack. In the end, the game went on indefinatly as both polar bears and seal kept betting on each other until the world finally came to an end. ";
     document.getElementById("gambleEnd").textContent = "Super Gamble Ending: Achieved";   
-    }
+    
+    image.src="gambleEnd.png"
+
+    //stop other confetti from playing 
+    confetti.reset({
+    shapes:[good]
+    });
+    
+    confetti.reset({
+    shapes:[bad]
+    });
+    ///////////
+    confetti({
+        shapes:[gamble]
+    });
+}
     else if(pureCount===3){ //super good ending, achieved by click all good options
+    image.src="superGoodEnd.png";
+    goodEnd.pause();
+    superGoodEnd.play();
+    
+
     document.getElementById("gameInst").textContent = "Rare Special Ending: Super Good End! Press the start button to play again";
     document.getElementById("storytext").textContent = "Not only did you prevent the polar bears from attacking, you were so smart that they even forfeited all of their kingdom's money and gave it to the Seal Village!";
     document.getElementById("pureEnd").textContent = "Super Good Ending: Achieved";
+
+    confetti({
+    shapes:[supGood]
+    });
+         
+
+    
 }
     else if(unpureCount===3){ //super bad ending, achieed by click all bad options
+    image.src ="superBadEnd.png";
+    badEnd.pause();
+    superBadEnd.play();
+
     document.getElementById("gameInst").textContent = "Rare Special Ending: Super Bad End! Press the start button to play again";
     document.getElementById("storytext").textContent = "A lot of bad choices were defnitely made here. Not only was Silly tired and exhausted when coming to the Polar Bear lair, she also accidently turned on her flamethrower on the highest heat setting due to her being exhausted! As a result, not only did she melted the polar bear's homes but also the entire artics's as well! Whoopsies!";
     document.getElementById("unpureEnd").textContent = "Super Bad Ending: Achieved";  
+     
 
+
+    confetti({
+    shapes:[supBad]
+    });
+}
 }
 
-}
 
 
 
