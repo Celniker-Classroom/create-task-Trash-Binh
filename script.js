@@ -35,8 +35,9 @@ choiceHmm.disabled = true;
 choiceBad.disabled = true;  
 
 
-//arrays added for game ending
+//arrays added for game endings and options
 let theEnd = [];
+let gambleDetect = [];
 
 //sound effects
 const buttonPress = new Audio("buttonPress.mp3"); //regular button clicking
@@ -58,7 +59,7 @@ let image = document.getElementById("storyChange");
 
 /// STORY BRANCHES
 function gameBegin(){
-
+ document.getElementById("resultChoice").textContent = "";
 image.src="storybranch1.png";   
 
 buttonPress.play();
@@ -87,15 +88,16 @@ function storyBranch1(){
 image.src="storybranch2.png"; 
 
     // 1st choices result
-    if ((theEnd[0] === "good") && (pureCount === 1)){ // good choice, good result
-     document.getElementById("resultChoice").textContent = "Silly scoots along the Snow-Spring Hill peacefully. On her way, she found a lot of rare herbal medicine (extremly rare in the Artic) that she could use!"
-     }
-     else if ((theEnd[0] === "good") && (gambleCount === 1)){ //hmm choice, good result
+  
+    if ((theEnd[0] === "good") && (gambleDetect[0] ==="yesGamble")){ //hmm choice, good result
        document.getElementById("resultChoice").textContent = "Silly scoots into the tunnel. She ends up relatively unscathed as a result and now is able to rest earlier!" ; 
        }
-       else if ((theEnd[0] === "bad") && (gambleCount === 1)){//hmm choice, bad result
+       else if ((theEnd[0] === "bad") && (gambleDetect[0] ==="yesGamble")){//hmm choice, bad result
          document.getElementById("resultChoice").textContent = "Silly scoots into the tunnel. Howeve, due to the route being unstable due to frequent earthquakes, the ice shards of the cave fell down quickly, blocking many off Silly's path. In the end after several scratches and a few detours she ended up traveling way longer than needed!";
-         }else if ((theEnd[0] === "bad") && (unpureCount === 1)){//bad choice, bad result
+         }  else if (theEnd[0] === "good"){ // good choice, good result
+     document.getElementById("resultChoice").textContent = "Silly scoots along the Snow-Spring Hill peacefully. On her way, she found a lot of rare herbal medicine (extremly rare in the Artic) that she could use!"
+     }
+         else{//bad choice, bad result
            document.getElementById("resultChoice").textContent = "Silly slowly makes her way up the moutain. However, just like the name implies, there was a strong avalanche that Silly got stuck in. Ulitmately, this delayed her travels by a really long time";
            }
 
@@ -120,22 +122,22 @@ buttonPress.play();
 image.src="storybranch3.png"; 
 
 // 2nd choices result
-if ((theEnd[1] === "bad") && (gambleCount === 1||gambleCount === 2)){ //hmm choice, bad result
+if ((theEnd[1] === "bad") && (gambleDetect[1] ==="yesGamble")){ //hmm choice, bad result, (ERROR CHECKED FOR LOGIC ISSUE USING CHATGPT FOR THIS STATEMENT)
  document.getElementById("resultChoice").textContent = "Silly accidently woke up a cursed sprit when setting up camp. The sprit ended taking all of her food and money she had, making silly very hungry and cold while sleeping there!";
  }
  
-else if ((theEnd[1] === "good") && (gambleCount === 1||gambleCount === 2)){ //hmm choice, good result
+else if ((theEnd[1] === "good") && (gambleDetect[1] ==="yesGamble")){ //hmm choice, good result
   document.getElementById("resultChoice").textContent = "Silly, while collecting artic wood for her camp, stumbled across a treasure chest filled with food and supplies. She ended up having extremly good rest as a result!" ;  
  }
 
  else if (theEnd[1] === "bad"){//bad choice, bad result
-document.getElementById("resultChoice").textContent ="Silly continued on with her journey, however ue to her tiredness, she collasped onto the snow and then a pack of artic foxes stole all of her food supplies. How sad!";
+document.getElementById("resultChoice").textContent ="Silly continued on with her journey, however due to her tiredness, she collasped onto the snow and then a pack of artic foxes stole all of her food supplies. How sad!";
  }
  
  
  
- else if (theEnd[1] === "good") { //good choice, good result
-document.getElementById("resultChoice").textContent = "Silly stopped by the PenguINN, a local hotel known for good hospitality. The staff there were very nice and gave Silly an affordable and comfortable room to sleep in! As a rsult, Silly endedd up getting very good sleep!";
+ else { //good choice, good result
+document.getElementById("resultChoice").textContent = "Silly stopped by the PenguINN, a local hotel known for good hospitality. The staff there were very nice and gave Silly an affordable and comfortable room to sleep in! As a result, Silly ended up getting very good sleep!";
  }
                    
  
@@ -155,26 +157,26 @@ branch2Run = false;
 function storyEnd(listArray){ 
 buttonPress.play();    
   // 3rd choices result
-if ((theEnd[2] === "bad") && (gambleCount === 1||gambleCount === 2||gambleCount === 3)){ //hmm choice, bad result
+if ((theEnd[2] === "bad") && (gambleDetect[2]==="yesGamble")){ //hmm choice, bad result
  document.getElementById("resultChoice").textContent = "The polar bears laughed at you for even offering such a thing and then they all started to head for the Seal VIllage. Hopefully you were able to knock them out if you rested well!";
  }
  
-else if ((theEnd[2] === "good") && (gambleCount === 1||gambleCount === 2||gambleCount === 3)){ //hmm choice, good result
+else if ((theEnd[2] === "good") && (gambleDetect[2]==="yesGamble")){ //hmm choice, good result
   document.getElementById("resultChoice").textContent = "The polar bears accepted your offer for allyship and planned not to harm Silly's village, unless you appeared tired while saying it, they don't like weakness in artic animals." ;  
  }
 
  else if (theEnd[2] === "bad"){//bad choice, bad result
-document.getElementById("resultChoice").textContent ="The flamethrower got out of control and melted a lot of ice everywhere! Hopefully the Seal Village isn't destroyed";
+document.getElementById("resultChoice").textContent ="The flamethrower got out of control and melted a lot of ice everywhere! Hopefully the Seal Village isn't destroyed!";
  }
  
  
  
- else if (theEnd[2] === "good") { //good choice, good result
+ else { //good choice, good result
 document.getElementById("resultChoice").textContent = "Silly, having trained in the village of seal style karate, hits the polar bears like a pinball machine. Given enough rest or a safe journey, she safely hit all the polar bears, hopefully with enough force with well rested strength!";
  }
                      
     
-    for(let i = 0; i < listArray.length; i++){
+    for(let i = 0; i < listArray.length; i++){//count number of items for good and bad in list
        if(listArray[i] === "good"){
         winDetermine++; 
      }
@@ -205,10 +207,12 @@ else {
     });
     }
 
-specialEnd();
+specialEnd(); /// check for special endng
 
 
-gambleCount= 0;
+
+//reset everything
+    gambleCount= 0;
     pureCount =0;
     unpureCount = 0; 
     branch1Run = true;
@@ -218,9 +222,10 @@ gambleCount= 0;
     choiceBad.disabled = true;
     startGame.disabled = false;
     theEnd = [];
+    gambleDetect = [];
     winDetermine = 0;
     loseDetermine = 0;
-
+   
 }
    
 
@@ -294,7 +299,8 @@ function arrAdd(choice){
 // debugged logic issues using ChatGPT, specifcally for the button values "hmm" input and "bad" input errors by identifying typo of not using "ëlse" in if else
     if(choice === "good"){  //good input
         theEnd.push("good");
-   pureCount++;
+   pureCount++; //coutn for good ending
+   gambleDetect.push("noGamble"); // count for gamble choice
     }
     else if(choice === "hmm"){ 
         let riskOutcome = Math.floor(Math.random()*2);
@@ -304,12 +310,14 @@ function arrAdd(choice){
             else{ //bad input
                 theEnd.push("bad");
             }
-    gambleCount++;
+    gambleCount++; //count for gamble ending
+     gambleDetect.push("yesGamble"); // count for gamble choice
 }
     else{ 
     theEnd.push("bad");
-       unpureCount++;
-}
+       unpureCount++; // count for bad ending
+    gambleDetect.push("noGamble"); // count for gamble choice
+    }
 
 
 // determine story path
